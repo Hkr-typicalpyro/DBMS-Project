@@ -1,0 +1,99 @@
+1️⃣ Login / Signup
+
+Already defined: Google mock button, email login, toggle form.
+
+2️⃣ Profile Page
+
+Already defined:
+
+Name, Email, Skill, Bio, Institution, Degree, Dates, Grade, Projects, Links.
+
+View/Edit toggle.
+
+Upload profile pic.
+
+Add project button.
+
+Clean card layout.
+
+3️⃣ Dashboard Page (New)
+
+This is the main screen after login.
+
+🔹 Layout:
+
+Top Navbar:
+
+Project name/logo (e.g., SkillSwap PeerXchange)
+
+Icons for:
+
+Notifications 🔔
+
+Profile 👤
+
+Logout
+
+Main Section:
+
+Title: “Trending People”
+
+A horizontal scrollable carousel/grid of about 20 random highly-rated users.
+
+Each user shown as a small rounded-square (squircle) card containing:
+
+Profile picture
+
+Name
+
+Skill Offered
+
+Star Rating ⭐ (1–5)
+
+When clicked → opens a popup modal (or side card) showing that person’s detailed profile view:
+
+Name, Skill, Bio, Institution, Degree, Grade, Projects, Links
+
+Buttons:
+
+Message 💬 (sends a mock message request)
+
+Request Session 📅 (sends a mock session request)
+
+🔹 Notifications:
+
+Notification Icon (🔔) in navbar:
+
+Shows a dropdown list with:
+
+“New session request from [Name]”
+
+“New message from [Name]”
+
+Unread items shown with a small dot 🔴
+
+Clicking one marks it as read.
+
+🔹 Functionality (Frontend only):
+
+When user clicks “Request Session”:
+
+Add a new notification (for the target profile) saying “Session request from [User]”.
+
+When user clicks “Message”:
+
+Add a new “Message from [User]” notification (mock).
+
+Notifications saved in localStorage for demo persistence.
+
+Use random generated sample data for the 20 trending users (array of objects in JS).
+
+🔹 Design:
+
+Clean modern UI: glassmorphism or card-based.
+
+Neutral background (#f9fafb), soft shadows.
+
+Accent color (blue or teal).
+
+Profile cards have subtle hover animation.
