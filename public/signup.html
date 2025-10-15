@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<title>Account Access</title>
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
+	<style>
+		:root {
+			--bg: linear-gradient(135deg, #eef2ff 0%, #faf5ff 50%, #f0fdfa 100%);
+			--card-bg: #ffffff;
+			--text: #0f172a;
+			--muted: #64748b;
+			--primary: #2563eb;
+			--primary-hover: #1d4ed8;
+			--border: #e5e7eb;
+			--accent: #a78bfa;
+		}
+
+		html, body {
+			height: 100%;
+		}
+
+		body {
+			margin: 0;
+			background: var(--bg);
+			font-family: 'Inter', 'Poppins', system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif;
+			color: var(--text);
+			display: grid;
+			place-items: center;
+			min-height: 100vh;
+			overflow: hidden;
+		}
+
+		.grid-fx {
+			position: fixed;
+			inset: -20vmax;
+			pointer-events: none;
+			background:
+				radial-gradient(40vmax 40vmax at 20% 20%, rgba(59,130,246,0.12), transparent 60%),
+				radial-gradient(40vmax 40vmax at 80% 30%, rgba(168,85,247,0.12), transparent 60%),
+				radial-gradient(40vmax 40vmax at 50% 80%, rgba(34,197,94,0.12), transparent 60%);
+			filter: blur(20px);
+			z-index: 0;
+		}
+
+		.card {
+			width: 100%;
+			max-width: 420px;
+			background: var(--card-bg);
+			border: 1px solid var(--border);
+			border-radius: 18px;
+			box-shadow: 0 20px 50px rgba(2, 6, 23, 0.08);
+			padding: 30px;
+			position: relative;
+			z-index: 1;
+			animation: floatIn 500ms cubic-bezier(.2,.8,.2,1) both;
+		}
+
+		.tabs {
+			display: grid;
+			grid-template-columns: 1fr 1fr;
+			gap: 10px;
+			background: #f8fafc;
+			border: 1px solid var(--border);
+			border-radius: 12px;
+			padding: 6px;
+			margin-bottom: 18px;
+		}
+
+		.tab-btn {
+			border: 0;
+			background: transparent;
+			padding: 10px 12px;
+			border-radius: 10px;
+			font-weight: 600;
+			cursor: pointer;
+			color: var(--muted);
+		}
+
+		.tab-btn.active { background: #ffffff; color: var(--text); box-shadow: 0 1px 2px rgba(0,0,0,0.04); }
+
+		@keyframes floatIn {
+			from { transform: translateY(8px); opacity: 0; }
+			to { transform: translateY(0); opacity: 1; }
+		}
+
+		.h1 {
+			margin: 0 0 6px;
+			font-size: 1.5rem;
+			font-weight: 700;
+			letter-spacing: -0.01em;
+		}
+
+		.tagline {
+			margin: 0 0 22px;
+			color: var(--muted);
+			font-size: 0.95rem;
+		}
+
+		.form {
+			display: grid;
+			gap: 14px;
+		}
+
+		.label {
+			font-size: 0.9rem;
+			font-weight: 600;
+			margin-bottom: 6px;
+		}
+
+		.input {
+			width: 100%;
+			padding: 12px 14px;
+			border: 1px solid var(--border);
+			border-radius: 12px;
+			background: #fff;
+			font-size: 0.95rem;
+			outline: none;
+			transition: border-color 0.2s, box-shadow 0.2s;
+		}
+
+		.input:focus {
+			border-color: var(--primary);
+			box-shadow: 0 0 0 4px rgba(37, 99, 235, 0.12);
+		}
+
+		.button {
+			width: 100%;
+			margin-top: 6px;
+			padding: 12px 16px;
+			border: 0;
+			border-radius: 12px;
+			background: var(--primary);
+			color: #fff;
+			font-weight: 600;
+			font-size: 1rem;
+			cursor: pointer;
+			transition: background 0.15s, transform 0.06s, box-shadow 0.15s;
+			box-shadow: 0 8px 20px rgba(37, 99, 235, 0.25);
+		}
+
+		.button:hover { background: var(--primary-hover); box-shadow: 0 10px 26px rgba(37, 99, 235, 0.3); }
+		.button:active { transform: translateY(1px); }
+
+		.bottom-link {
+			text-align: center;
+			margin-top: 12px;
+			font-size: 0.95rem;
+			color: var(--muted);
+		}
+
+		.bottom-link a {
+			color: var(--primary);
+			text-decoration: none;
+			font-weight: 600;
+		}
+
+		.bottom-link a:hover { text-decoration: underline; }
+	</style>
+</head>
+<body>
+	<div class="card">
+		<h1 class="h1">Account Access</h1>
+		<p class="tagline">Exchange skills. Grow together.</p>
+
+		<div class="tabs" role="tablist">
+			<button class="tab-btn active" id="tab-signup" role="tab" aria-selected="true" aria-controls="panel-signup">Sign Up</button>
+			<button class="tab-btn" id="tab-login" role="tab" aria-selected="false" aria-controls="panel-login">Log In</button>
+		</div>
+
+		<form class="form" id="signup-form" role="tabpanel" aria-labelledby="tab-signup" id="panel-signup">
+			<div>
+				<label for="signup-name" class="label">Name</label>
+				<input id="signup-name" name="name" type="text" class="input" placeholder="Your full name" required />
+			</div>
+			<div>
+				<label for="signup-email" class="label">Email</label>
+				<input id="signup-email" name="email" type="email" class="input" placeholder="you@example.com" required />
+			</div>
+			<div>
+				<label for="signup-password" class="label">Password</label>
+				<input id="signup-password" name="password" type="password" class="input" placeholder="Create a password" required />
+			</div>
+			<button type="submit" class="button">Sign Up</button>
+		</form>
+
+		<form class="form" id="login-form" role="tabpanel" aria-labelledby="tab-login" id="panel-login" style="display:none">
+			<div>
+				<label for="login-email" class="label">Email</label>
+				<input id="login-email" name="email" type="email" class="input" placeholder="you@example.com" />
+			</div>
+			<div>
+				<label for="login-password" class="label">Password</label>
+				<input id="login-password" name="password" type="password" class="input" placeholder="Your password" />
+			</div>
+			<button type="submit" class="button">Log In</button>
+		</form>
+
+		<p class="bottom-link" id="bottom-link">
+			Already have an account? <a href="#" id="link-login">Log In</a>
+		</p>
+	</div>
+
+	<script>
+		const tabSignup = document.getElementById('tab-signup');
+		const tabLogin = document.getElementById('tab-login');
+		const formSignup = document.getElementById('signup-form');
+		const formLogin = document.getElementById('login-form');
+		const bottomLink = document.getElementById('bottom-link');
+		const linkLogin = document.getElementById('link-login');
+
+		function showSignup() {
+			tabSignup.classList.add('active');
+			tabLogin.classList.remove('active');
+			formSignup.style.display = '';
+			formLogin.style.display = 'none';
+			bottomLink.innerHTML = "Already have an account? <a href=\"#\" id=\"link-login\">Log In</a>";
+		}
+
+		function showLogin() {
+			tabLogin.classList.add('active');
+			tabSignup.classList.remove('active');
+			formLogin.style.display = '';
+			formSignup.style.display = 'none';
+			bottomLink.innerHTML = "Don't have an account? <a href=\"#\" id=\"link-signup\">Sign Up</a>";
+		}
+
+		tabSignup.addEventListener('click', showSignup);
+		tabLogin.addEventListener('click', showLogin);
+		bottomLink.addEventListener('click', (e) => {
+			if (e.target && e.target.id === 'link-login') { e.preventDefault(); showLogin(); }
+			if (e.target && e.target.id === 'link-signup') { e.preventDefault(); showSignup(); }
+		});
+
+		// Submit handlers
+		formSignup.addEventListener('submit', async (e) => {
+			e.preventDefault();
+			const name = document.getElementById('signup-name').value;
+			const email = document.getElementById('signup-email').value;
+			const password = document.getElementById('signup-password').value;
+			const res = await fetch('/api/auth/register', {
+				method: 'POST', headers: { 'Content-Type': 'application/json' },
+				body: JSON.stringify({ name, email, password })
+			});
+			const json = await res.json();
+			alert((res.ok ? '' : 'Error: ') + json.message);
+			if (res.ok) { showLogin(); }
+		});
+
+		formLogin.addEventListener('submit', async (e) => {
+			e.preventDefault();
+			const email = document.getElementById('login-email').value;
+			const password = document.getElementById('login-password').value;
+			const res = await fetch('/api/auth/login', {
+				method: 'POST', headers: { 'Content-Type': 'application/json' },
+				body: JSON.stringify({ email, password })
+			});
+			const json = await res.json();
+			alert((res.ok ? '' : 'Error: ') + json.message);
+		});
+	</script>
+</body>
+</html>
+
+
